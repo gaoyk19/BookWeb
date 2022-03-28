@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <!-- 配置Tomcat服务器启动之后便跳转到该页面 -->
   <welcome-file-list>
-    <welcome-file>/pages/user/login.html</welcome-file>
+    <welcome-file>/include/UploadFile.jsp</welcome-file>
   </welcome-file-list>
 
   <servlet>
@@ -26,5 +26,28 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SearchStudentServlet</servlet-name>
+    <servlet-class>web.SearchStudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchStudentServlet</servlet-name>
+    <url-pattern>/searchStudentServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>web.UploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/uploadServlet</url-pattern>
+  </servlet-mapping>
+
+<!--  配置监听器-->
+  <listener>
+    <listener-class>Listener.MyServletContextListener</listener-class>
+  </listener>
 
 </web-app>
