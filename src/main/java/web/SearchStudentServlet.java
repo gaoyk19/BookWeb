@@ -26,7 +26,7 @@ public class SearchStudentServlet extends HttpServlet {
             userList.add(new User(t,"user"+t,"password"+t,"email"+t+"@163.com"));
         }
         request.setAttribute("userList",userList);
-        request.getRequestDispatcher("/.jsp").forward(request,response);
+        request.getRequestDispatcher("/include/ShowStudent.jsp").forward(request,response);
     }
 
 

@@ -4,10 +4,10 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <!-- 配置Tomcat服务器启动之后便跳转到该页面 -->
-  <welcome-file-list>
-    <welcome-file>/include/UploadFile.jsp</welcome-file>
-  </welcome-file-list>
+   配置Tomcat服务器启动之后便跳转到该页面
+<!--  <welcome-file-list>-->
+<!--    <welcome-file>/pages/user/login.jsp</welcome-file>-->
+<!--  </welcome-file-list>-->
 
   <servlet>
     <servlet-name>RegistServlet</servlet-name>
@@ -43,6 +43,15 @@
   <servlet-mapping>
     <servlet-name>UploadServlet</servlet-name>
     <url-pattern>/uploadServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>web.DownloadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/downloadServlet</url-pattern>
   </servlet-mapping>
 
 <!--  配置监听器-->
