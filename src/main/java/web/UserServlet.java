@@ -5,7 +5,6 @@ import service.UserService;
 import service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 //@WebServlet(name = "UserServlet", value = "/UserServlet")
-public class UserServlet extends HttpServlet {
+public class UserServlet extends BaseServlet {
     private UserService userService=new UserServiceImpl();
 
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,6 +70,7 @@ public class UserServlet extends HttpServlet {
 //        }
         //使用反射优化if-else代码
         String action = request.getParameter("action");
+        System.out.println(action);
         try {
             Method method=this.getClass().getDeclaredMethod(action,HttpServletRequest.class,HttpServletResponse.class);
             method.invoke(this,request,response );

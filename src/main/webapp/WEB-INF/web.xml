@@ -62,6 +62,14 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/userServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>BaseServlet</servlet-name>
+    <servlet-class>web.BaseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BaseServlet</servlet-name>
+    <url-pattern>/baseServlet</url-pattern>
+  </servlet-mapping>
 
 <!--  配置监听器-->
   <listener>
