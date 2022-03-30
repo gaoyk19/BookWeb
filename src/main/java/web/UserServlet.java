@@ -3,12 +3,12 @@ package web;
 import pojo.User;
 import service.UserService;
 import service.impl.UserServiceImpl;
+import utils.WebUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 //@WebServlet(name = "UserServlet", value = "/UserServlet")
@@ -46,8 +46,16 @@ public class UserServlet extends BaseServlet {
                 System.out.println("用户名 ["+username+" ]已经存在！");
                 request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
             }else{
+                User user = new User();
+                WebUtils.copyParamToBean(request,user);
+//                try {
+//                    //把请求对象的参数一次性注入到user对象中
+//                    BeanUtils.populate(user,request.getParameterMap());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
                 //用户名不存在,可以注册,然后跳转到注册成功页面
-                userService.registUser(new User(null,username,password,email));
+                userService.registUser(user);
                 request.getRequestDispatcher("/pages/user/regist_success.jsp").forward(request,response);
             }
         }else{
@@ -76,11 +84,8 @@ public class UserServlet extends BaseServlet {
             method.invoke(this,request,response );
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
