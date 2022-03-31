@@ -47,7 +47,7 @@ public class UserServlet extends BaseServlet {
                 request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
             }else{
                 User user = new User();
-                WebUtils.copyParamToBean(request,user);
+                WebUtils.copyParamToBean(request.getParameterMap(),user);
 //                try {
 //                    //把请求对象的参数一次性注入到user对象中
 //                    BeanUtils.populate(user,request.getParameterMap());

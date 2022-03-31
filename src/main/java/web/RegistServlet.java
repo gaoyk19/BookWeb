@@ -32,16 +32,20 @@ public class RegistServlet extends HttpServlet {
             if(userService.isExistUser(username)){
                 //用户名已经存在 跳回注册页面
                 System.out.println("用户名 ["+username+" ]已经存在！");
-                request.getRequestDispatcher("/pages/user/regist.html").forward(request,response);
+                request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
             }else{
                 //用户名不存在,可以注册,然后跳转到注册成功页面
                 userService.registUser(new User(null,username,password,email));
-                request.getRequestDispatcher("/pages/user/regist_success.html").forward(request,response);
+                request.getRequestDispatcher("/pages/user/regist_success.jsp").forward(request,response);
             }
         }else{
             //跳回注册页面
+            request.setAttribute("msg","验证码错误！");
+            request.setAttribute("username",username);
+            request.setAttribute("email",email);
+
             System.out.println("验证码 ["+code+" [ 错误！");
-            request.getRequestDispatcher("/pages/user/regist.html").forward(request,response);
+            request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
         }
 
     }
