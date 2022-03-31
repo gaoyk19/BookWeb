@@ -75,6 +75,14 @@
     <servlet-name>BaseServlet</servlet-name>
     <url-pattern>/baseServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>BookServlet</servlet-name>
+    <servlet-class>web.BookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BookServlet</servlet-name>
+    <url-pattern>/manager/bookServlet</url-pattern>
+  </servlet-mapping>
 
 <!--  配置监听器-->
   <listener>
