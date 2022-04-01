@@ -22,6 +22,19 @@
 		<%-- 静态包含 manager管理模块的菜单  --%>
 		<%@include file="/pages/common/manager_menu.jsp"%>
 
+<%--		点击删除图书之后，需要弹出提示--%>
+		<script type="text/javascript">
+			$(function (){
+				//给删除的a标签绑定单击事件，用于删除的确认提示操作
+				$("a.deleteClass").click(function (){
+					//确认提示框函数，有两个按钮：一个确认（true），一个取消（false)
+					return confirm("确认删除 "+$(this).parent().parent().find("td:first").text()+" ?");
+
+				});
+			});
+
+		</script>
+
 
 	</div>
 	
@@ -44,7 +57,7 @@
 					<td>${book.sales}</td>
 					<td>${book.stock}</td>
 					<td><a href="book_edit.jsp">修改</a></td>
-					<td><a href="manager/bookServlet?action=deleteBook&id=${book.id}" >删除</a></td>
+					<td><a class="deleteClass" href="manager/bookServlet?action=deleteBook&id=${book.id}" >删除</a></td>
 				</tr>
 			</c:forEach>
 
