@@ -6,7 +6,7 @@ import pojo.User;
 import java.util.Map;
 
 public class WebUtils {
-    public static void copyParamToBean( Map value,Object bean){
+    public static void copyParamToBean(Map value, Object bean){
         User user = new User();
         try {
 //            Map<String,String[]> paraMap= request.getParameterMap();

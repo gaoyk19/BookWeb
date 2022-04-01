@@ -3,6 +3,7 @@ package web;
 import pojo.Book;
 import service.BookService;
 import service.impl.BookServiceImpl;
+import utils.WebUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,25 @@ public class BookServlet extends BaseServlet {
     private BookService bookService=new BookServiceImpl();
     
     protected void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       //1.获取请求参数，封装得到Book对象
+        Book book=new Book();
+        WebUtils.copyParamToBean(request.getParameterMap(),book);
+        //2. 将图书信息保存到数据库中
+        bookService.addBook(book);
+        //3. 跳转到图书列表页面
+        //TODO 注意这里如果使用“转发”的话，是不合理的，每次按下F5就会调用addBook方法,下面使用重定向解决这个问题
+//        request.getRequestDispatcher("/manager/bookServlet?action=list").forward(request,response);
+
+        response.sendRedirect(request.getContextPath()+"/manager/bookServlet?action=list");
+
 
     }
 
     protected void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String idStr=request.getParameter("id");
+        int id = Integer.parseInt(idStr);
+        bookService.deleteBookById(id);
+        response.sendRedirect(request.getContextPath()+"/manager/bookServlet?action=list");
     }
 
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

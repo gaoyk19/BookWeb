@@ -44,7 +44,7 @@
 					<td>${book.sales}</td>
 					<td>${book.stock}</td>
 					<td><a href="book_edit.jsp">修改</a></td>
-					<td><a href="#">删除</a></td>
+					<td><a href="manager/bookServlet?action=deleteBook&id=${book.id}" >删除</a></td>
 				</tr>
 			</c:forEach>
 
@@ -57,7 +57,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><a href="book_edit.jsp">添加图书</a></td>
+				<td><a hrefpages/manager/book_edit.j="sp">添加图书</a></td>
 			</tr>	
 		</table>
 	</div>
