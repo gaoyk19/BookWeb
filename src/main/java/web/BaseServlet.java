@@ -21,8 +21,8 @@ public abstract class BaseServlet extends HttpServlet {
 //            regist(request,response);
 //        }
         //使用反射优化if-else代码
+        //如：action为字符串list的时候，将调用BookServlet类中的list()方法
         String action = request.getParameter("action");
-        System.out.println(action);
         try {
             Method method=this.getClass().getDeclaredMethod(action,HttpServletRequest.class,HttpServletResponse.class);
             method.invoke(this,request,response );

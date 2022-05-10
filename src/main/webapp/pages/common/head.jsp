@@ -14,6 +14,7 @@
             + request.getServerPort()            //端口号
             + request.getContextPath()
             + "/";
+    pageContext.setAttribute("basePath",basePath);
 %>
 
 <!--写base标签，永远固定相对路径跳转的结果-->

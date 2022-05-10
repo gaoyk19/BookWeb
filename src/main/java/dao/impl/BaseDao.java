@@ -57,7 +57,7 @@ public abstract class BaseDao {
     public Object queryForSingleValue(String sql,Object...args){
         Connection conn=JdbcUtils.getConnection();
         try {
-            queryRunner.query(conn,sql,new ScalarHandler(),args);
+            return queryRunner.query(conn,sql,new ScalarHandler(),args);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {

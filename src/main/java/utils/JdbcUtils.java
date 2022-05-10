@@ -1,23 +1,17 @@
 package utils;
 
-import com.alibaba.druid.pool.DruidAbstractDataSource;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.SQLSyntaxErrorException;
 import java.util.Properties;
 
 public class JdbcUtils {
     private static DruidDataSource dataSource;
     static {
-
         try {
             Properties properties = new Properties();
             // 读取 jdbc.properties属性配置文件

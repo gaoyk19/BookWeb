@@ -9,7 +9,7 @@
 <div>
 <%-- manager/bookServlet代表请求资源的地址，action=list表示调用服务器功能（BookServlet类）中的哪个方法   --%>
 <%--    定义了点击“图书管理”按钮之后，就会跳转；href为超链接！--%>
-    <a href="manager/bookServlet?action=list">图书管理</a>
+    <a href="manager/bookServlet?action=page">图书管理</a>
     <a href="order_manager.jsp">订单管理</a>
-    <a href="../../index.jsp">返回商城</a>
+    <a href="index.jsp">返回商城</a>
 </div>

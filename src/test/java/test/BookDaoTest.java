@@ -4,8 +4,10 @@ import dao.BookDao;
 import dao.impl.BookDaoImpl;
 import junit.framework.TestCase;
 import pojo.Book;
+import pojo.Page;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class BookDaoTest extends TestCase {
     private BookDao bookDao=new BookDaoImpl();
@@ -33,5 +35,14 @@ public class BookDaoTest extends TestCase {
 
     public void testQueryBooks() {
         bookDao.queryBooks();
+    }
+
+    public void testQueryForPageTotalCount() {
+        System.out.println(bookDao.queryForPageTotalCount());
+    }
+
+    public void testQueryForItems() {
+        List<Book> books=bookDao.queryForItems(0, Page.PAGE_SIZE);
+        System.out.println(books.toString());
     }
 }

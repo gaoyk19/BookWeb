@@ -48,16 +48,16 @@
 				<td>库存</td>
 				<td colspan="2">操作</td>
 			</tr>
-<%--			遍历前面BookServlet程序保存在request域中的books数据--%>
-			<c:forEach items ="${requestScope.books}" var="book">
+<%--			遍历前面BookServlet程序保存在request域中的数据--%>
+			<c:forEach items ="${requestScope.page.items}" var="book">
 				<tr>
 					<td>${book.name}</td>
 					<td>${book.price}</td>
 					<td>${book.author}</td>
 					<td>${book.sales}</td>
 					<td>${book.stock}</td>
-					<td><a href="book_edit.jsp">修改</a></td>
-					<td><a class="deleteClass" href="manager/bookServlet?action=deleteBook&id=${book.id}" >删除</a></td>
+					<td><a href="manager/bookServlet?action=getBook&id=${book.id}&pageNo=${requestScope.page.pageNo}">修改</a></td>
+					<td><a class="deleteClass" href="manager/bookServlet?action=deleteBook&id=${book.id}&pageNo=${requestScope.page.pageNo}" >删除</a></td>
 				</tr>
 			</c:forEach>
 
@@ -70,9 +70,11 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><a hrefpages/manager/book_edit.j="sp">添加图书</a></td>
+				<td><a href="pages/manager/book_edit.jsp?pageNo=${requestScope.page.pageTotal}">添加图书</a></td>
 			</tr>	
 		</table>
+<%--		静态包含分页条--%>
+		<%@include file="/pages/common/page_nav.jsp"%>
 	</div>
 
 

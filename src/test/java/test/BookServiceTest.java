@@ -2,6 +2,7 @@ package test;
 
 import junit.framework.TestCase;
 import pojo.Book;
+import pojo.Page;
 import service.BookService;
 import service.impl.BookServiceImpl;
 
@@ -18,6 +19,7 @@ public class BookServiceTest extends TestCase {
     }
 
     public void testUpdateBook() {
+        bookService.updateBook(new Book(6,"西红柿炒鸡蛋",new BigDecimal(9.90),"周请吃",12,53,"static/img/default.jpg"));
     }
 
     public void testQueryBookById() {
@@ -25,5 +27,9 @@ public class BookServiceTest extends TestCase {
     }
 
     public void testQueryBooks() {
+    }
+
+    public void testPage(){
+        System.out.println(bookService.page(1, Page.PAGE_SIZE));
     }
 }
