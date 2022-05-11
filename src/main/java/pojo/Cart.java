@@ -65,7 +65,7 @@ public class Cart {
          */
         CartItem item = items.get(cartItem.getId());
         if(item==null){
-            items.put(item.getId(),item);
+            items.put(cartItem.getId(),cartItem);
         }else{
             item.setCount(item.getCount()+1);//数量累加
             item.setTotalPrice(item.getPrice().multiply(new BigDecimal(item.getCount())));//更新总金额
