@@ -10,36 +10,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
+
 //@WebServlet(name = "UserServlet", value = "/UserServlet")
 public class UserServlet extends BaseServlet {
     private UserService userService=new UserServiceImpl();
 
-    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            //1. 销毁session中用户登录的信息（或者销毁session）
+            request.getSession().invalidate();
+            //2. 重定向到首页(或登陆页面)
+//            request.getRequestDispatcher("/index.jsp").forward(request,response); //可以避免表单重定向吧？？
+            response.sendRedirect(request.getContextPath());
+        }
+
+        protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // a.获取请求参数
         String username=request.getParameter("username");
         String password=request.getParameter("password");
 //        String email=request.getParameter("email");
-
-        if(userService.login(new User(null,username,password,null))==null){
+        User loginUser=userService.login(new User(null,username,password,null));
+        if(loginUser==null){
             System.out.println("登陆失败！");
             request.setAttribute("msg","用户名或密码错误！");
             request.setAttribute("username",username);
 
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request,response);
         }else{
-
+            //用户登陆成功，保存用户的信息到Session域中
+            request.getSession().setAttribute("user",loginUser);
             request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request,response);
         }
     }
     protected void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        // a.获取请求参数
+
+        //获取google开源jar开源jar包提供的验证码
+        String token = (String) request.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+        //删除Session中的验证码
+        request.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
+
+        //a.获取请求参数
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         String email=request.getParameter("email");
         String code=request.getParameter("code");
 
         //b.检查验证码是否正确(忽略大小写)
-        if("abcde".equalsIgnoreCase(code)){
+        if(token !=null && token.equalsIgnoreCase(code)){
             if(userService.isExistUser(username)){
                 //用户名已经存在 跳回注册页面
                 System.out.println("用户名 ["+username+" ]已经存在！");

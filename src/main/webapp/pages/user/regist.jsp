@@ -12,6 +12,14 @@
 		<script type="text/javascript">
 			// 页面加载完成之后
 			$(function () {
+/*********************************************************************************/
+				//给验证码图片绑定事件,点击验证码图片可以进行刷新
+				$("#code_img").click(function (){
+					this.src="${basePath}kaptcha.jpg"+new Date();
+
+				});
+				
+/*********************************************************************************/
 				// 给注册绑定单击事件
 				$("#sub_btn").click(function () {
 					// 验证用户名：必须由字母，数字下划线组成，并且长度为5到12位
@@ -83,7 +91,7 @@
 					$("span.errorMsg").text("");
 
 				});
-
+/*********************************************************************************/
 			});
 
 		</script>
@@ -143,13 +151,12 @@
 <%--										   value="<%=request.getAttribute("email")==null?" ":request.getAttribute("email")%>"--%>
 <%--										   autocomplete="off" tabindex="1" name="email" id="email" />--%>
 									<input class="itxt" type="text" placeholder="请输入邮箱地址"
-										   value=${requestScope.email}
 										   autocomplete="off" tabindex="1" name="email" id="email" />
 									<br />
 									<br />
 									<label>验证码：</label>
-									<input class="itxt" type="text" name="code" style="width: 150px;" id="code" />
-									<img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+									<input class="itxt" type="text" name="code" style="width: 80px;" id="code" />
+									<img id="code_img" alt="" src="kaptcha.jpg" style="float: right; margin-right:40px; width:100px; height:30px" >
 									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />

@@ -32,4 +32,9 @@ public class BookServiceTest extends TestCase {
     public void testPage(){
         System.out.println(bookService.page(1, Page.PAGE_SIZE));
     }
+    public void testPageByPrice(){
+        Page<Book> page=bookService.pageByPrice(1,Page.PAGE_SIZE,5,30);
+        System.out.println(page.toString());
+
+    }
 }

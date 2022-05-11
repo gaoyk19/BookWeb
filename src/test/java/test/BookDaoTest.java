@@ -45,4 +45,15 @@ public class BookDaoTest extends TestCase {
         List<Book> books=bookDao.queryForItems(0, Page.PAGE_SIZE);
         System.out.println(books.toString());
     }
-}
+
+    public void testQueryForPageInPrice(){
+        System.out.println(bookDao.queryForPageInPrice(5,30));
+    }
+
+    public void testQueryForPageItemsInPrice(){
+        List<Book> books=bookDao.queryForPageItemsInPrice(5,30,1 ,Page.PAGE_SIZE);
+        for(Book book:books){
+            System.out.println(book);
+        }
+    }
+ }
