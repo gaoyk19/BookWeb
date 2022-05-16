@@ -7,7 +7,7 @@ import java.util.Map;
 //购物车对象
 public class Cart {
 //    private Integer totalCount;
-    private BigDecimal totalPrice;
+//    private BigDecimal totalPrice;
     private Map<Integer,CartItem> items=new LinkedHashMap<>();
 
     //修改商品数量
@@ -25,16 +25,13 @@ public class Cart {
 
 
     public BigDecimal getTotalPrice() {
-        totalPrice=new BigDecimal(0);
+        BigDecimal totalPrice = new BigDecimal(0);
         for(CartItem item:items.values()){
-            totalPrice.add(item.getTotalPrice());
+            totalPrice= totalPrice.add(item.getTotalPrice());
         }
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     public Map<Integer,CartItem> getItems() {
         return items;
@@ -48,7 +45,6 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "totalCount=" + getTotalCount() +
-                ", totalPrice=" + totalPrice +
                 ", items=" + items +
                 '}';
     }
