@@ -11,6 +11,7 @@ import java.util.Properties;
 
 public class JdbcUtils {
     private static DruidDataSource dataSource;
+    private static ThreadLocal<Connection>conns=new ThreadLocal<>();
     static {
         try {
             Properties properties = new Properties();
@@ -31,24 +32,71 @@ public class JdbcUtils {
     public static Connection getConnection(){
         Connection conn=null;
         try {
-            conn=dataSource.getConnection();
+            if(conn==null){
+                conn=dataSource.getConnection();
+            }
+            //将连接保存到ThreadLocal对象中
+            conns.set(conn);
+            //设置为手动管理事务
+            conn.setAutoCommit(false);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return conn;
     }
-    /**
-     * 关闭连接
-     * @return */
-    public static void close(Connection conn){
-        if(conn!=null){
+
+    //提交事务，并关闭释放连接
+    public static void commitAndClose(){
+        Connection connection=conns.get();
+        if(connection!=null){
             try {
-                conn.close();
+                connection.commit();//提交事务
             } catch (SQLException e) {
                 e.printStackTrace();
+            }finally {
+                try {
+                    connection.close();//关闭连接
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        //必须执行remove操作，否则会出现错误（因为Tomcat服务器底层使用了线程池技术）
+        conns.remove();
     }
+
+    //回滚事务，并关闭释放连接
+    public static void rollbackAndClose(){
+        Connection connection=conns.get();
+        if(connection!=null){
+            try {
+                connection.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        conns.remove();
+
+    }
+//    /**
+//     * 关闭连接
+//     * @return */
+//    public static void close(Connection conn){
+//        if(conn!=null){
+//            try {
+//                conn.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     public static void main(String[] args) throws IOException {
 

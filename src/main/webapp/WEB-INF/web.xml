@@ -120,6 +120,17 @@
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/orderServlet</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <filter-class>Filter.ManagerFilter</filter-class>
+    <filter-name>ManagerFilter</filter-name>
+  </filter>
+  <filter-mapping>
+    <filter-name>ManagerFilter</filter-name>
+    <url-pattern>/pages/manager/*</url-pattern>
+    <url-pattern>/manager/bookServlet</url-pattern>
+
+  </filter-mapping>
 <!--  配置监听器-->
   <listener>
     <listener-class>Listener.MyServletContextListener</listener-class>
