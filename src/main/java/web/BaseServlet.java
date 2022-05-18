@@ -30,6 +30,7 @@ public abstract class BaseServlet extends HttpServlet {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+           throw new RuntimeException(e);
         }
     }
 }

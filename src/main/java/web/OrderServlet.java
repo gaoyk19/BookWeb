@@ -4,7 +4,6 @@ import pojo.Cart;
 import pojo.User;
 import service.OrderService;
 import service.impl.OrderServiceImpl;
-import utils.JdbcUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,14 +22,7 @@ public class OrderServlet extends BaseServlet {
             return;
         }
         Integer userId=user.getId();
-        String orderId= null;
-        try {
-            orderId = orderService.createOrder(cart, userId);
-            JdbcUtils.commitAndClose();//如果创建订单成功，那么提交事务并关闭连接
-        } catch (Exception e) {
-            JdbcUtils.rollbackAndClose();//如果创建订单失败，那么回滚事务并关闭连接
-            e.printStackTrace();
-        }
+        String orderId= orderService.createOrder(cart, userId);
 
 //        request.setAttribute("orderId",orderId);
         //会出现重复提交表单的问题

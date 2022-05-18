@@ -129,7 +129,16 @@
     <filter-name>ManagerFilter</filter-name>
     <url-pattern>/pages/manager/*</url-pattern>
     <url-pattern>/manager/bookServlet</url-pattern>
+  </filter-mapping>
 
+  <filter>
+    <filter-class>Filter.TransactionFilter</filter-class>
+    <filter-name>TransactionFilter</filter-name>
+  </filter>
+  <filter-mapping>
+    <filter-name>TransactionFilter</filter-name>
+<!--    表示当前工程下的所有请求-->
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
 <!--  配置监听器-->
   <listener>
