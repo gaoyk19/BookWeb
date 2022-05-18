@@ -30,15 +30,15 @@ public class JdbcUtils {
      * 获取数据库连接池中的连接
      * @return */
     public static Connection getConnection(){
-        Connection conn=null;
+        Connection conn=conns.get();
         try {
             if(conn==null){
                 conn=dataSource.getConnection();
+                //将连接保存到ThreadLocal对象中
+                conns.set(conn);
+                //设置为手动管理事务
+                conn.setAutoCommit(false);
             }
-            //将连接保存到ThreadLocal对象中
-            conns.set(conn);
-            //设置为手动管理事务
-            conn.setAutoCommit(false);
 
         } catch (SQLException e) {
             e.printStackTrace();

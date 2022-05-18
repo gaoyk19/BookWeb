@@ -140,6 +140,11 @@
 <!--    表示当前工程下的所有请求-->
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/pages/error/error.jsp</location>
+  </error-page>
 <!--  配置监听器-->
   <listener>
     <listener-class>Listener.MyServletContextListener</listener-class>
